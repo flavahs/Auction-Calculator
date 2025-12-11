@@ -1,48 +1,5 @@
 import streamlit as st
 
-# --- 커스텀 CSS 삽입 (UI 전체 축소) ---
-st.markdown("""
-<style>
-
-/* 전체 글씨 크기 줄이기 */
-html, body, [class*="css"] {
-    font-size: 13px !important;
-}
-
-/* 입력 박스 높이 줄이기 */
-input, select, textarea {
-    padding: 4px 6px !important;
-    font-size: 13px !important;
-    height: 32px !important;
-}
-
-/* number_input 의 +, - 버튼 크기 줄이기 */
-.stNumberInput button {
-    padding: 0px 6px !important;
-    font-size: 13px !important;
-}
-
-/* selectbox 크기 */
-.stSelectbox div[data-baseweb="select"] > div {
-    min-height: 32px !important;
-    font-size: 13px !important;
-}
-
-/* 헤더 크기 축소 */
-h1 {
-    font-size: 26px !important;
-}
-h2 {
-    font-size: 20px !important;
-}
-h3 {
-    font-size: 18px !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-
 st.set_page_config(page_title="경매 수익 계산기", layout="wide")
 
 st.title("🏠 경매 수익 계산기 (UI Only)")
