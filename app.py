@@ -1,10 +1,39 @@
 import streamlit as st
+from scraper import scrape_case  # ⬅ scraper.py에서 불러옴
 
 st.set_page_config(page_title="경매 수익 계산기", layout="wide")
 
-st.title("🏠 경매 수익 계산기 (UI Only)")
+st.title("🏠 경매 수익 계산기 (UI Only + 사건번호 스크래핑 기능 추가)")
 
+# -----------------------------
+# 🔎 사건번호 입력 UI
+# -----------------------------
+st.subheader("🔍 사건번호로 경매물건 정보 가져오기")
+
+colA, colB, colC = st.columns([1, 1, 1.2])
+
+with colA:
+    year = st.selectbox("년도", options=[2025, 2024, 2023, 2022, 2021, 2020], index=1)
+
+with colB:
+    sno = st.text_input("사건번호(숫자만)", placeholder="예: 122500")
+
+with colC:
+    if st.button("📌 사건번호로 불러오기"):
+        if sno.strip() == "":
+            st.error("사건번호를 입력하세요.")
+        else:
+            result = scrape_case(str(year), sno)   # ⬅ scraper.py 호출
+
+            if result["status"] == "ok":
+                st.success("✔ 스크래핑 완료! scraped_data.json에 저장되었습니다.")
+            else:
+                st.error(result["msg"])
+
+
+st.markdown("---")
 st.markdown("계산식 없이 **UI 구조만 먼저 구현한 버전**입니다.")
+
 
 # -----------------------------
 # 1. 기본 정보 입력
