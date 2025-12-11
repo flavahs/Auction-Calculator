@@ -10,46 +10,6 @@ st.markdown("계산식 없이 **UI 구조만 먼저 구현한 버전**입니다.
 # 1. 기본 정보 입력
 # -----------------------------
 # --- A. 물건 기본 정보 그룹화 (Expander) ---
-# 세션 스테이트로 값 보관
-if "area" not in st.session_state:
-    st.session_state.area = 29130000   # 예: 2,913만 원 등
-
-col1, col2 = st.columns([3, 2])
-
-with col1:
-    st.number_input(
-        "주택면적",
-        value=st.session_state.area,
-        step=1,
-        format="%d",
-        key="area_input"
-    )
-
-with col2:
-    st.write("단위 조정 버튼")
-
-    c1, c2, c3, c4 = st.columns(4)
-
-    # 증감 단위
-    big = 10_000_000
-    small = 1_000_000
-
-    with c1:
-        if st.button("−10M"):
-            st.session_state.area -= big
-
-    with c2:
-        if st.button("−1M"):
-            st.session_state.area -= small
-
-    with c3:
-        if st.button("+1M"):
-            st.session_state.area += small
-
-    with c4:
-        if st.button("+10M"):
-            st.session_state.area += big
-            
 with st.expander("A. 입찰 정보", expanded=True):
     col1, col2 = st.columns(2)
     
