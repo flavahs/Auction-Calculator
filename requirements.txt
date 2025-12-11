@@ -1,3 +1,5 @@
 streamlit
 pandas
-BeautifulSoup
+bs4
+numpy
+requests
