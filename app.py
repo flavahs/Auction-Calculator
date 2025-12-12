@@ -1,48 +1,4 @@
 import streamlit as st
-from scraper_search import search_engine_lookup, scrape_detail_from_url
-
-st.set_page_config(page_title="경매 수익 계산기", layout="wide")
-
-st.title("🏛 검색엔진 기반 사건조회 + 🏠 경매 수익 계산기")
-
-# -----------------------------
-# 0. 사건번호 입력
-# -----------------------------
-st.subheader("🔎 사건번호로 경매물건 정보 불러오기 (검색엔진 경유)")
-
-col1, col2, col3 = st.columns([1, 1, 1])
-
-with col1:
-    year = st.selectbox("연도", [2025, 2024, 2023, 2022, 2021])
-
-with col2:
-    sno = st.text_input("사건번호 (숫자만)", value="63950")
-
-with col3:
-    search_clicked = st.button("📌 불러오기", use_container_width=True)
-
-case_data = None
-
-if search_clicked:
-    case_number = f"{year}타경{sno}"
-
-    with st.spinner(f"🔎 {case_number} 검색 중... (검색엔진 경유)"):
-        url = search_engine_lookup(case_number)
-
-        if not url:
-            st.error("❌ 검색엔진에서 사건 관련 페이지를 찾지 못했습니다.")
-        else:
-            st.info(f"🔗 발견된 상세페이지 URL: {url}")
-            try:
-                case_data = scrape_detail_from_url(url)
-                st.success("📌 사건 정보 불러오기 성공!")
-                st.json(case_data)
-            except Exception as e:
-                st.error(f"❌ 상세페이지 파싱 중 오류 발생: {e}")
-
-st.markdown("---")
-
-
 
 st.set_page_config(page_title="경매 수익 계산기", layout="wide")
 
